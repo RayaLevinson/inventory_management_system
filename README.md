@@ -16,8 +16,5 @@
 - #### State of Module - Released / Development
 ![Image 5](presentation/image5.png)
 
-- #### Serial Number of Module 
-![Image 6](presentation/image7.png)
-
 - #### Module 
 ![Image 7](presentation/image8.png)
