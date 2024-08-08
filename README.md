@@ -16,6 +16,12 @@
 - ### Add New Material
   ![Image 12](presentation/image12.png)
 
+- ### Materials Filter
+  ![Image 19](presentation/image19.png)
+
+- ### Filtered Materials
+  ![Image 21](presentation/image21.png)
+
 - ### Part Numbers
   ![Image 15](presentation/image15.png)
 
