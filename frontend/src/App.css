@@ -1,0 +1,213 @@
+.App {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.sidebar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-width: 250px;
+  max-width: 250px;
+  background: #663399;
+  border-radius: 15px;
+  color: #adb5bd;
+  margin-left: -250px;
+  transition: all 0.5s;
+}
+
+.sidebar.is-open {
+  margin-left: 0;
+  transition: 0.5s;
+}
+
+.sidebar-header {
+  background: #663399;
+  color: #adb5bd;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+.sidebar-header h3 {
+  color: #fff;
+  padding: 1em;
+}
+
+.sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+.collapse.show,
+.collapsing {
+  /* background: #663399; */
+}
+
+.nav-item {
+  /*color: #ced4da;*/
+  color: #adb5bd;
+  font-weight: 300;
+}
+
+.nav-item.open {
+  color: #e9ecef;
+  /* background: #663399; */
+}
+
+.nav-link-active {
+  font-weight: 400 !important;
+  color: #663399 !important;
+  background: white !important;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.nav-link-inactive {
+  font-weight: 400 !important;
+
+  color: white !important;
+}
+.nav-link {
+  font-size: 18px !important;
+}
+.nav-item:hover {
+  background: #313b4c;
+  color: #fff;
+  transition: 0.2s;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.nav-item .svg-inline--fa {
+  color: inherit;
+}
+
+li a.dropdown-toggle::after {
+  display: inline-flex;
+  position: relative;
+  left: 60%;
+  top: 10%;
+}
+
+.sidebar-header > button {
+  position: relative;
+  float: right;
+  margin: 0.5em;
+  font-size: 2rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+.content {
+  padding: 20px;
+  margin-left: 0;
+  height: 100vh;
+}
+
+@media only screen and (max-width: 575.98px) {
+  body {
+    overflow: hidden;
+  }
+
+  .content.is-open {
+    /*margin-left: 100%;*/
+    display: none;
+    transition: all 0.5s;
+  }
+
+  .sidebar.is-open {
+    min-width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    transition: all 0.5s, height 0s;
+    height: 100vh !important;
+  }
+
+  .sidebar.is-open > .sidebar-header button {
+    display: block;
+  }
+
+  li a.dropdown-toggle::after {
+    display: inline-block;
+    position: relative;
+    left: 68%;
+  }
+}
+
+.Accordion-menu-header > button {
+  background-color: transparent;
+  border: none;
+  color: white !important;
+}
+
+.Accordion-menu-header > .accordion-button {
+  background-color: transparent !important;
+  border: none;
+  padding-bottom: 0 !important;
+  font-size: 18px !important;
+  box-shadow: none !important;
+}
+
+.Accordion-menu-header > .accordion-button::after {
+  content: none !important;
+}
+
+.Accordion-menu-header > .accordion-button:active {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.Accordion-menu-header > .accordion-button:focus {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.app-modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.app-modal-body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: inset 0 0 5px #fff;
+}
+
+/* Handle */
+.app-modal-body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: gray;
+  border: 1px solid white;
+}
+
+.app-modal-body::-webkit-scrollbar-thumb:hover {
+  background: #707070;
+}
+
+.Accordion-filter-header > button {
+  background-color: transparent;
+  border: none;
+}
+
+.Accordion-filter-header > .accordion-button {
+  background-color: transparent !important;
+  border: none;
+  box-shadow: none !important;
+}

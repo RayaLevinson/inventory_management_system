@@ -4,8 +4,9 @@
  * @description Validation utility function. Validates data against a given Joi schema.
  * @param {Joi.Schema} schema - The Joi schema object to validate against.
  * @param {Object} data - The data to be validated.
- * @returns {Object} - The result of the validation. If the validation is successful, returns an object containing the validated data.
- *                     If the validation fails, returns an object containing the error details.
+ * @returns {Object} - The result of the validation. 
+ *    If the validation is successful, returns an object containing the validated data.
+ *    If the validation fails, returns an object containing the error details.
  */
 function validateWithJoi(schema, data) {
   const options = {

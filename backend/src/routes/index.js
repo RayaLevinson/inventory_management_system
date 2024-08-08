@@ -1,22 +1,24 @@
 const router = require("express").Router();
-const description_routes = require("./modules/parts/description.routes");
-const pn_routes = require("./modules/parts/pn.routes");
-const revision_routes = require("./modules/parts/revision.routes");
-const state_routes = require("./modules/parts/state.routes");
-const status_routes = require("./modules/parts/status.routes");
-const module_serial_number_routes = require("./modules/parts/serialNumber.routes");
-
+const material_routes = require('./materials/material.routes')
+const type_of_material_routes = require('./materials/parts/type_of_material.routes')
+const part_number_routes = require("./part_numbers/part_number.routes");
+const part_number_revision_routes = require("./part_numbers/parts/revision_of_part_number.routes");
 const module_routes = require("./modules/module.routes");
+const module_state_routes = require("./modules/parts/state.routes");
+const module_status_routes = require("./modules/parts/status.routes");
 
-//Modules Routes
-router.use("/modules", module_routes);            // Module routes
-router.use("/descriptions", description_routes);  // Module Description routes
-router.use("/pn", pn_routes);                     // Module Part Number routes
-router.use("/revisions", revision_routes);        // Module Revisions per Part Number routes
-router.use("/statuses", status_routes);           // Module Status routes
-router.use("/states", state_routes);              // Module State routes
-router.use('/module_serial_numbers',              // Module Serial Number routes
-            module_serial_number_routes)
+// Material Routes
+router.use('/materials', material_routes) 
+router.use('/materials/types', type_of_material_routes) 
+
+// Part Number Routes
+router.use('/part_numbers', part_number_routes)                     // Part Number routes
+router.use('/part_numbers/revisions', part_number_revision_routes)                     // Part Number routes
+
+// Modules Routes
+router.use("/modules", module_routes);                // Module routes
+router.use('/modules/statuses', module_status_routes) // Module Status routes
+router.use('/modules/states', module_state_routes)    // Module State routes
 
 const api_routes = router;
 

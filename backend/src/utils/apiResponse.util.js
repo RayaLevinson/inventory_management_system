@@ -3,7 +3,7 @@ const { node } = require("../config");
 /**
  * @description This function returns the error response
  */
-exports.errorResponse = (err, res) => {
+exports.ErrorResponse = (err, res) => {
   err.status = err.status || "error";
   err.statusCode = err.statusCode || 500;
 

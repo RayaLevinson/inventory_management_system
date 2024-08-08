@@ -1,14 +1,14 @@
 const router = require('express').Router()
 const moduleController = require('@controllers/modules/module.controller')
 const moduleValidation = require('@validations/modules/module.validation')
-const commonValidation = require('@validations/common.validation')
+const commonValidation = require('@validations/common/common.validation')
 
 // Module routes
 
-//@route    GET /api/modules
-//@desc     Get all modules based 
+//@route    POST /api/modules
+//@desc     Get all modules based
 //@access   Public
-router.get('/', moduleController.getAll)
+router.post('/', moduleController.getByFilter)
 
 //@route    POST /api/modules
 //@desc     Add a new module

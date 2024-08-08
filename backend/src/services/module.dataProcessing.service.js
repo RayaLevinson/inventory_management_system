@@ -1,6 +1,6 @@
-const ModuleDescription = require('@database/models/modules/parts/module.description.model')
-const ModulePartNumber = require('@database/models/modules/parts/module.pn.model')
-const ModuleRevision = require('@database/models/modules/parts/module.revision.model')
+const Material = require('@database/models/materials/material.model')
+const PartNumber = require('@database/models/common/pn.model')
+const RevisionsOfPartNumber = require('@database/models/part_number/revision_of_pn.model')
 const ModuleState = require('@database/models/modules/parts/module.state.model')
 const ModuleStatus = require('@database/models/modules/parts/module.status.model')
 const AppError = require('@utils/appError.util')
@@ -14,12 +14,12 @@ const fetchAllData = async (list) => {
     }
   }
 
-  const descriptions = await ModuleDescription.find({
-    name: { $in: list.map((item) => item.description_id).filter(Boolean) }
+  const materials = await Material.find({
+    name: { $in: list.map((item) => item.material_id).filter(Boolean) }
   })
-  checkFoundValues(list.map((item) => item.description_id).filter(Boolean), descriptions, 'Descriptions')
+  checkFoundValues(list.map((item) => item.material_id).filter(Boolean), materials, 'Materials')
 
-  const pns = await ModulePartNumber.find({
+  const pns = await PartNumber.find({
     name: { $in: list.map((item) => item.pn_id).filter(Boolean) }
   })
   checkFoundValues(list.map((item) => item.pn_id).filter(Boolean), pns, 'PNs')
@@ -29,7 +29,7 @@ const fetchAllData = async (list) => {
   })
   checkFoundValues(list.map((item) => item.status_id).filter(Boolean), status, 'Statuses')
 
-  const revisions = await ModuleRevision.find({
+  const revisions = await RevisionsOfPartNumber.find({
     name: { $in: list.map((item) => item.revision_id).filter(Boolean) }
   })
   checkFoundValues(list.map((item) => item.revision_id).filter(Boolean), revisions, 'Revisions')
@@ -40,7 +40,7 @@ const fetchAllData = async (list) => {
   checkFoundValues(list.map((item) => item.state_id).filter(Boolean), states, 'States')
 
   return {
-    descriptions,
+    materials,
     pns,
     status,
     revisions,
@@ -49,13 +49,13 @@ const fetchAllData = async (list) => {
 }
 
 const mapDataToItems = (list, data) => {
-  const { descriptions, pns, status, revisions, states } = data
+  const { materials, pns, status, revisions, states } = data
 
   const stateMap = Object.fromEntries(states.map((item) => [item.name, item._id]))
   const statusMap = Object.fromEntries(status.map((item) => [item.name, item._id]))
   const pnMap = Object.fromEntries(pns.map((item) => [item.name, item._id]))
   const revisionMap = Object.fromEntries(revisions.map((item) => [item.name, item._id]))
-  const descriptionMap = Object.fromEntries(descriptions.map((item) => [item.name, item._id]))
+  const materialMap = Object.fromEntries(materials.map((item) => [item.name, item._id]))
 
   return list.map((module) => {
     const item = { ...module }
@@ -84,11 +84,11 @@ const mapDataToItems = (list, data) => {
       }
       item.revision_id = revisionMap[item.revision_id]
     }
-    if (item.description_id) {
-      if (!descriptionMap[item.description_id]) {
-        throw new AppError(`Description not found: ${item.description_id}`, 404)
+    if (item.material_id) {
+      if (!materialMap[item.material_id]) {
+        throw new AppError(`Material not found: ${item.material_id}`, 404)
       }
-      item.description_id = descriptionMap[item.description_id]
+      item.material_id = materialMap[item.material_id]
     }
     if (item.date) item.date = new Date(item.date)
     return item

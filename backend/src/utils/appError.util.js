@@ -8,7 +8,8 @@ class AppError extends Error {
     super(message)
     this.isOperational = true
     this.statusCode = statusCode
-    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error' // 4xx client error, 5xx server error
+    // 4xx client error, 5xx server error
+    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error'
     Error.captureStackTrace(this, this.constructor)
   }
 }

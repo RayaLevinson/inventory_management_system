@@ -3,47 +3,61 @@ const mongoose = require('mongoose')
 // Module Schema
 const moduleSchema = new mongoose.Schema(
   {
-    description_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'ModuleDescription'
+    name: {
+      type: String,
+      trim: true,
+      required: [true, 'Please add Module Name'],
+      minlength: [2, 'Module Name should be at least 2 characters'],
+      maxlength: [50, 'Module Name cannot be more than 50 characters']
     },
-    pn_id: {
+    material_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'ModulePartNumber'
+      ref: 'Material',
+      required: [true, 'Please add Material']
     },
-    revision_id: {
+    part_number_id: {
+      // Part Number ID
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'ModuleRevision'
+      ref: 'PartNumber',
+      required: [true, 'Please add Part Number']
     },
-    status_id: {
+    part_number_revision_id: {
+      // Part Number Revision ID
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'ModuleStatus'
-    },
-    state_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'ModuleState'
+      ref: 'RevisionsOfPartNumber',
+      required: [true, 'Please add Revision of Part Number']
     },
     module_serial_number: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'ModuleSerialNumber'
+      type: String,
+      trim: true
     },
     firmware1: {
-      type: String
+      type: String,
+      trim: true
     },
     firmware2: {
-      type: String
+      type: String,
+      trim: true
     },
     firmware3: {
-      type: String
+      type: String,
+      trim: true
     },
-    quantity: {
-      type: Number
+    module_status_id: {
+      // Can be 'In Stock', 'On Shelf', 'Assembled', 'Obsolete'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ModuleStatus',
+      required: [true, 'Please add Module Status']
     },
-    date: {
-      type: Date
+    module_state_id: {
+      // Can be 'Released', 'Development'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ModuleState',
+      required: [true, 'Please add Module State']
     },
     comments: {
-      type: String
+      type: String,
+      trim: true
     }
   },
 

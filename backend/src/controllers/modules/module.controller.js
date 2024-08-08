@@ -2,8 +2,8 @@ const Module = require('@database/models/modules/module.model')
 const { successResponse } = require('@utils/apiResponse.util')
 const tryCatchAsync = require('@utils/tryCatchAsync.util')
 const { success } = require('@utils/statusCode.util').statusCode
-const { processSystems } = require('@services/module.dataProcessing.service')
 const AppError = require('@utils/appError.util')
+// const { processData } = require('@services/module.dataProcessing.service')
 
 
 exports.create = tryCatchAsync(async (req, res) => {
@@ -12,27 +12,26 @@ exports.create = tryCatchAsync(async (req, res) => {
   let module = await Module.create(payload)
   module = await Module.findById(module._id)
     .populate('description_id')
-    .populate('pn_id')
+    .populate('part_number_id')
     .populate('revision_id')
     .populate('status_id')
     .populate('state_id')
-    .populate('module_serial_number')
   const response_data = { module }
 
   return successResponse(res, response_data, 'Module has been created.', success)
 })
 
 
-exports.createMany = tryCatchAsync(async (req, res) => {
-  let { list } = req.body
+// exports.createMany = tryCatchAsync(async (req, res) => {
+//   let { list } = req.body
 
-  let modules = await processSystems(list)
-  await Module.insertMany(modules)
+//   let modules = await processData(list)
+//   await Module.insertMany(modules)
 
-  let response_data = { modules }
+//   let response_data = { modules }
 
-  return successResponse(res, response_data, 'Module has been created', success)
-})
+//   return successResponse(res, response_data, 'Module has been created', success)
+// })
 
 
 exports.update = tryCatchAsync(async (req, res, next) => {
@@ -61,7 +60,7 @@ exports.delete = tryCatchAsync(async (req, res) => {
   return successResponse(res, response_data, 'Module has been deleted', success)
 })
 
-exports.getAll = tryCatchAsync(async (req, res) => {
+exports.getByFilter = tryCatchAsync(async (req, res) => {
   const { page, page_size, ...rest } = req.body
   const query = { ...rest }
   if (query.date) {
@@ -75,7 +74,6 @@ exports.getAll = tryCatchAsync(async (req, res) => {
     .skip(skip)
     .limit(page_size)
     .sort({ createdAt: -1 })
-    .populate('description_id')
     .populate('revision_id')
     .populate('pn_id')
     .populate('state_id')
@@ -87,6 +85,7 @@ exports.getAll = tryCatchAsync(async (req, res) => {
 
   return successResponse(res, response_data, '', success)
 })
+
 exports.getAllByIds = tryCatchAsync(async (req, res) => {
   const { ids } = req.body
 
@@ -103,4 +102,3 @@ exports.getAllByIds = tryCatchAsync(async (req, res) => {
 
   return successResponse(res, response_data, '', success)
 })
-
